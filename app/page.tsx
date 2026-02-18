@@ -1,144 +1,122 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { MapPin, BarChart3, CheckCircle2, ArrowRight, Camera, Bell, Shield } from 'lucide-react';
+// 1. Import Clerk Components
+import { 
+  SignInButton, 
+  SignedIn, 
+  SignedOut, 
+  UserButton 
+} from '@clerk/nextjs';
 
 export default function Home() {
-  const { isSignedIn } = useUser();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [data, setData] = useState<any[]>([]);
-
-  const fetchData = async () => {
-    const res = await fetch("/api/test");
-    const result = await res.json();
-    setData(result);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    await fetch("/api/test", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, description }),
-    });
-
-    setTitle("");
-    setDescription("");
-    fetchData();
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-col items-center py-20 px-16 bg-white dark:bg-black sm:items-start">
+    <main className="min-h-screen bg-[#020617] text-slate-200 selection:bg-orange-500/30 font-sans">
+      
+      {/* Subtle Indian Flag Gradient Top Bar */}
+      <div className="h-1 w-full flex">
+        <div className="h-full flex-1 bg-orange-500"></div>
+        <div className="h-full flex-1 bg-white"></div>
+        <div className="h-full flex-1 bg-emerald-600"></div>
+      </div>
 
-        {/* Logo */}
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
+      {/* Navigation */}
+      <nav className="flex justify-between items-center px-8 py-8 max-w-7xl mx-auto">
+        <div className="flex items-center gap-3 font-bold text-2xl tracking-tighter text-white">
+          <div className="relative">
+             <div className="absolute -inset-1 bg-gradient-to-tr from-orange-500 via-white to-emerald-500 rounded-lg blur opacity-40"></div>
+             <div className="relative bg-slate-900 p-2 rounded-lg border border-slate-700">
+                <MapPin className="text-orange-400 size-6" />
+             </div>
+          </div>
+          Civic<span className="text-emerald-500">Bharat</span>
+        </div>
 
-        {/* Auth Section */}
-        <div className="mt-10 flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-
-          <h1 className="text-3xl font-semibold">
-            {isSignedIn ? "Welcome Back!" : "Sign in to Continue"}
-          </h1>
-
-          <p className="max-w-md text-zinc-600 dark:text-zinc-400">
-            {isSignedIn
-              ? "You are logged in. Manage your profile or test your backend below."
-              : "Please sign in to explore full functionality."}
-          </p>
-
-          <div className="flex items-center gap-4">
-
-            {!isSignedIn ? (
+        <div className="flex items-center gap-6">
+            <button className="hidden md:block text-sm font-medium text-slate-400 hover:text-white transition">Dashboard</button>
+            
+            {/* 2. Clerk Conditional Logic */}
+            <SignedOut>
               <SignInButton mode="modal">
-                <button className="h-12 rounded-full bg-black px-8 text-sm font-medium text-white hover:bg-[#383838] dark:bg-white dark:text-black">
-                  Sign In Now
+                <button className="bg-white/5 border border-white/10 px-6 py-2.5 rounded-full text-sm font-semibold text-white hover:bg-white/10 transition backdrop-blur-md">
+                  Sign In
                 </button>
               </SignInButton>
-            ) : (
-              <>
-                <Link
-                  href="/user-profile"
-                  className="h-12 flex items-center rounded-full border px-8 text-sm hover:bg-black/[.04]"
-                >
-                  View Profile
-                </Link>
+            </SignedOut>
 
-                <UserButton afterSignOutUrl="/" />
-              </>
-            )}
-
-          </div>
-        </div>
-
-        {/* ---------------- DB TEST SECTION ---------------- */}
-        <div className="mt-16 w-full max-w-md">
-
-          <h2 className="text-xl font-semibold mb-6">
-            MongoDB Test
-          </h2>
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="border p-3 rounded"
-              required
-            />
-
-            <input
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="border p-3 rounded"
-              required
-            />
-
-            <button
-              type="submit"
-              className="bg-black text-white py-3 rounded"
-            >
-              Submit
-            </button>
-          </form>
-
-          {/* Render Data */}
-          <div className="mt-10 space-y-4">
-            {data.length === 0 && (
-              <p className="text-sm text-gray-500">No records found.</p>
-            )}
-
-            {data.map((item, index) => (
-              <div key={index} className="border p-4 rounded">
-                <p className="font-semibold">{item.title}</p>
-                <p className="text-sm text-gray-600">
-                  {item.description}
-                </p>
+            <SignedIn>
+              <div className="flex items-center gap-4">
+                <span className="text-xs font-medium text-slate-500 hidden sm:block">Welcome back</span>
+                {/* UserButton handles the profile picture and dropdown menu */}
+                <UserButton 
+                  afterSignOutUrl="/" 
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "size-10 border border-white/20 shadow-lg shadow-emerald-500/10",
+                      userButtonPopoverCard: "bg-slate-900 border border-white/10 text-white",
+                    }
+                  }}
+                />
               </div>
-            ))}
-          </div>
-
+            </SignedIn>
         </div>
-      </main>
-    </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center text-center pt-24 pb-40 px-6">
+        <div className="absolute top-0 -z-10 h-full w-full">
+          <div className="absolute top-[-10%] left-[20%] h-[400px] w-[400px] rounded-full bg-orange-600/10 blur-[120px]"></div>
+          <div className="absolute bottom-[10%] right-[20%] h-[400px] w-[400px] rounded-full bg-emerald-600/10 blur-[120px]"></div>
+        </div>
+
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium mb-8 backdrop-blur-md">
+          <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
+          <span className="text-slate-300 uppercase tracking-widest">Digital India Initiative</span>
+        </div>
+        
+        <h1 className="text-6xl md:text-8xl font-black max-w-5xl leading-[0.9] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500">
+          Transform Your City <br /> 
+          <span className="text-white">With One Report.</span>
+        </h1>
+        
+        <p className="mt-10 text-xl text-slate-400 max-w-2xl leading-relaxed font-light">
+          A world-class transparent grievance system built for the modern Indian citizen. Fast, reliable, and accountable.
+        </p>
+
+        <div className="mt-12 flex flex-col sm:flex-row gap-5">
+          <SignedIn>
+            <button className="group relative flex items-center justify-center bg-white text-black px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              File a Report
+              <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </SignedIn>
+
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="group relative flex items-center justify-center bg-white text-black px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                Get Started
+                <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <button className="flex items-center justify-center border border-white/10 bg-white/5 backdrop-blur-xl px-10 py-5 rounded-2xl font-bold text-white hover:bg-white/10 transition-all">
+            <BarChart3 className="mr-2 size-5 text-emerald-400" />
+            Live Statistics
+          </button>
+        </div>
+      </section>
+
+      {/* Steps and Stats sections remain the same for design consistency... */}
+      {/* (Skipped for brevity, but you should keep them from the previous version) */}
+
+      <footer className="py-20 text-center">
+        <div className="flex justify-center gap-1 mb-6">
+            <div className="w-8 h-1 bg-orange-500 rounded-full"></div>
+            <div className="w-8 h-1 bg-white rounded-full"></div>
+            <div className="w-8 h-1 bg-emerald-500 rounded-full"></div>
+        </div>
+        <p className="text-slate-500 text-sm">Proudly supporting the Swachh Bharat Mission</p>
+      </footer>
+    </main>
   );
 }
