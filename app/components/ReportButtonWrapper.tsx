@@ -1,26 +1,14 @@
 'use client';
-import { useState } from 'react';
-import ReportModal from './ReportModal';
+import Link from 'next/link';
 
-export default function ReportButtonWrapper({ deptName, deptId }: { deptName: string, deptId: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function ReportButtonWrapper({ deptId }: { deptId: string }) {
   return (
-    <>
+    <Link href={`/departments/${deptId}/report`} className="w-full">
       <button 
-        onClick={() => setIsOpen(true)}
-        className="w-full py-4 rounded-xl font-bold bg-white text-black hover:scale-[1.02] transition-transform active:scale-95"
+        className="w-full py-4 rounded-xl font-bold bg-white text-black hover:scale-[1.05] transition-all active:scale-95 shadow-xl shadow-white/5"
       >
-        Open Reporting Tool
+        Add Report
       </button>
-
-      {isOpen && (
-        <ReportModal 
-          deptName={deptName} 
-          deptId={deptId} 
-          onClose={() => setIsOpen(false)} 
-        />
-      )}
-    </>
+    </Link>
   );
 }

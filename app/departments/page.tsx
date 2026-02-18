@@ -42,10 +42,10 @@ export default function DepartmentsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {departments.map((dept) => (
             <Link key={dept.id} href={`/departments/${dept.id}`}>
-              <div className="group relative bg-slate-900/40 border border-white/5 p-8 rounded-[2rem] hover:bg-slate-900/60 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+              <div className="group relative bg-slate-900/40 border border-white/5 p-8 rounded-2xl hover:bg-slate-900/60 transition-all duration-300 hover:-translate-y-2 overflow-hidden">
                 
                 {/* Accent Glow */}
-                <div className={`absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br ${dept.color} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity`}></div>
+                <div className={`absolute -right-4 -top-4 w-24 h-24 bg-linear-to-br ${dept.color} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity`}></div>
                 
                 <div className="bg-slate-800 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white border border-white/10 group-hover:scale-110 transition-transform">
                   {React.cloneElement(dept.icon, { size: 28 })}

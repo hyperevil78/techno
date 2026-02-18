@@ -23,15 +23,15 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <Navbar/>
+      <Navbar />
 
       {/* Hero Section */}
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center text-center pt-24 pb-40 px-6">
         {/* Premium Glow Accents */}
         <div className="absolute top-0 -z-10 h-full w-full">
-          <div className="absolute top-[-10%] left-[20%] h-[400px] w-[400px] rounded-full bg-orange-600/10 blur-[120px]"></div>
-          <div className="absolute bottom-[10%] right-[20%] h-[400px] w-[400px] rounded-full bg-emerald-600/10 blur-[120px]"></div>
+          <div className="absolute top-[-10%] left-[20%] height:400px width:400px rounded-full bg-orange-600/10 blur-[120px]"></div>
+          <div className="absolute bottom-[10%] right-[20%] height:400px width:400px rounded-full bg-emerald-600/10 blur-[120px]"></div>
         </div>
 
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium mb-8 backdrop-blur-md">
@@ -39,7 +39,7 @@ export default function Home() {
           <span className="text-slate-300 uppercase tracking-widest">Digital India Initiative</span>
         </div>
 
-        <h1 className="text-6xl md:text-8xl font-black max-w-5xl leading-[0.9] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500">
+        <h1 className="text-6xl md:text-8xl font-black max-w-5xl leading-[0.9] tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white to-slate-500">
           Transform Your City <br />
           <span className="text-white">With One Report.</span>
         </h1>

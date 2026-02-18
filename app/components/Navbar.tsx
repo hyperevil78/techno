@@ -6,9 +6,9 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center px-8 py-8 max-w-7xl mx-auto">
       {/* Logo Section */}
-      <div className="flex items-center gap-3 font-bold text-2xl tracking-tighter text-white">
+    <div className="flex items-center gap-3 font-bold text-2xl tracking-tighter text-white">
         <div className="relative group cursor-pointer">
-          <div className="absolute -inset-1 bg-gradient-to-tr from-orange-500 via-white to-emerald-500 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+          <div className="absolute -inset-1 bg-linear-to-tr from-orange-500 via-white to-emerald-500 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
           <div className="relative bg-slate-900 p-2 rounded-lg border border-slate-700/50">
             <MapPin className="text-orange-400 size-6" />
           </div>
@@ -44,7 +44,7 @@ export default function Navbar() {
               </button>
             </Link>
 
-            <div className="h-6 w-[1px] bg-white/10 mx-1" />
+            <div className="h-6 width:1px bg-white/10 mx-1" />
 
             {/* Profile */}
             <UserButton
