@@ -88,7 +88,7 @@ export default function Home() {
         <div className="mt-12 flex flex-col sm:flex-row gap-5">
           {/* PRIMARY ACTION: SEE DEPARTMENTS */}
           <Link href="/departments" className="w-full sm:w-auto">
-            <button className="group relative w-full flex items-center justify-center bg-white text-black px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <button className="group relative w-full flex items-center justify-center bg-white text-black px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:cursor-pointer">
               See Departments
               <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -97,7 +97,7 @@ export default function Home() {
           {/* SECONDARY ACTION: SHOW SIGN IN IF LOGGED OUT, SHOW DASHBOARD IF LOGGED IN */}
           <SignedOut>
             <SignInButton mode="modal">
-              <button className="flex items-center justify-center border border-white/10 bg-white/5 backdrop-blur-xl px-10 py-5 rounded-2xl font-bold text-white hover:bg-white/10 transition-all">
+              <button className="flex items-center justify-center border border-white/10 bg-white/5 backdrop-blur-xl px-10 py-5 rounded-2xl font-bold text-white hover:bg-white/10 transition-all hover:cursor-pointer">
                 Join the Movement
               </button>
             </SignInButton>
