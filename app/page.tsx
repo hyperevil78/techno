@@ -1,6 +1,8 @@
 import React from 'react';
 import { MapPin, BarChart3, CheckCircle2, ArrowRight, Camera, Bell, Shield } from 'lucide-react';
 import Link from 'next/link';
+import Navbar from './components/Navbar';
+
 // 1. Import Clerk Components
 import {
   SignInButton,
@@ -21,46 +23,7 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-8 py-8 max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 font-bold text-2xl tracking-tighter text-white">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-orange-500 via-white to-emerald-500 rounded-lg blur opacity-40"></div>
-            <div className="relative bg-slate-900 p-2 rounded-lg border border-slate-700">
-              <MapPin className="text-orange-400 size-6" />
-            </div>
-          </div>
-          Civic<span className="text-emerald-500">Bharat</span>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <button className="hidden md:block text-sm font-medium text-slate-400 hover:text-white transition">Dashboard</button>
-
-          {/* 2. Clerk Conditional Logic */}
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button className="bg-white/5 border border-white/10 px-6 py-2.5 rounded-full text-sm font-semibold text-white hover:bg-white/10 transition backdrop-blur-md">
-                Sign In
-              </button>
-            </SignInButton>
-          </SignedOut>
-
-          <SignedIn>
-            <div className="flex items-center gap-4">
-              <span className="text-xs font-medium text-slate-500 hidden sm:block">Welcome back</span>
-              {/* UserButton handles the profile picture and dropdown menu */}
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: {
-                    userButtonAvatarBox: "size-10 border border-white/20 shadow-lg shadow-emerald-500/10",
-                    userButtonPopoverCard: "bg-slate-900 border border-white/10 text-white",
-                  }
-                }}
-              />
-            </div>
-          </SignedIn>
-        </div>
-      </nav>
+      <Navbar/>
 
       {/* Hero Section */}
       {/* Hero Section */}
