@@ -38,13 +38,10 @@ export async function GET(req: Request) {
     const dept = searchParams.get("dept");
     const userId = searchParams.get("userId");
 
-    // Build a dynamic query
     let query: any = {};
     if (dept) query.department = dept;
     if (userId) query.userId = userId;
-
-    // If it's a general department view, limit to 5. 
-    // If it's a user's personal inbox, show everything.
+  
     const limitValue = dept && !userId ? 5 : 0; 
 
     const reports = await Report.find(query)

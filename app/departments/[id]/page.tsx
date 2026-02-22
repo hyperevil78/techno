@@ -25,8 +25,6 @@ export default async function DepartmentDetail({
   const { id } = await params;
   const dept = departmentData[id] || { name: "Not Found", color: "text-slate-400", bg: "bg-slate-800" };
 
-  // --- FETCH DATA (GET FEATURE) ---
-  // We fetch from our own API route
   let reports = [];
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/reports?dept=${id}`, { cache: 'no-store' });
